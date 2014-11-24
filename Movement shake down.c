@@ -67,6 +67,6 @@ wait;
 getJoystickSettings(joystick);
 motor[leftM]=joystick.joy1_y1;
 motor[rightM]=joystick.joy2_y1;
-waitJ
-stopALLMotors;
+waitJ;
+stopALLMotors();
 }
