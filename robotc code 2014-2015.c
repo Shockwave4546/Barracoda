@@ -2,9 +2,6 @@
 #pragma config(Hubs,  S2, HTServo,  none,     none,     none)
 #pragma config(Sensor, S1,     ,               sensorI2CMuxController)
 #pragma config(Sensor, S2,     ,               sensorI2CMuxController)
-#pragma config(Motor,  motorA,           ,             tmotorNXT, openLoop)
-#pragma config(Motor,  motorB,           ,             tmotorNXT, openLoop)
-#pragma config(Motor,  motorC,           ,             tmotorNXT, openLoop)
 #pragma config(Motor,  mtr_S1_C1_1,     leftM,         tmotorTetrix, PIDControl, reversed, driveLeft, encoder)
 #pragma config(Motor,  mtr_S1_C1_2,     rightM,        tmotorTetrix, PIDControl, driveRight, encoder)
 #pragma config(Servo,  srvo_S2_C1_1,    SFR,                  tServoStandard)
@@ -16,8 +13,10 @@
 
 task main()
 {
+servo[SFR]=5;
+wait10Msec(100);
 getJoystickSettings(joystick);
 motor[leftM]=joystick.joy1_y1;
 motor[rightM]=joystick.joy2_y1;
+
 }
- 
