@@ -6,7 +6,7 @@
 #pragma config(Sensor, S3,     ,               sensorI2CMuxController)
 #pragma config(Motor,  mtr_S1_C1_1,     leftM,         tmotorTetrix, PIDControl, reversed, driveLeft, encoder)
 #pragma config(Motor,  mtr_S1_C1_2,     rightM,        tmotorTetrix, PIDControl, driveRight, encoder)
-#pragma config(Motor,  mtr_S2_C1_1,     SL,            tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S2_C1_1,     SL,            tmotorTetrix, openLoop) //up and down
 #pragma config(Servo,  srvo_S3_C1_1,    SFR,                  tServoStandard)
 #pragma config(Servo,  srvo_S3_C1_2,    SFL,                  tServoStandard)
 #pragma config(Servo,  srvo_S3_C1_3,    SB,                   tServoStandard)
