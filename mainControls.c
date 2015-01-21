@@ -1,5 +1,3 @@
-#pragma systemFile
-
 void allForward()
 {
 	motor[frontLeft] = 100;
@@ -22,4 +20,9 @@ void allBackwards()
 {
 	motor[frontLeft] = -100;
 	motor[frontRight] = -100;
+}
+void allStop()
+{
+	motor[frontLeft] = 0;
+	motor[frontRight] = 0;
 }

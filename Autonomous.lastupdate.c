@@ -76,39 +76,43 @@ void initializeRobot()
 
 void Sensor()
 {
-	if (SensorValue[light2] <= 40 || SensorValue[light2] <= 72)
+	if (SensorValue[light1] >= 40 || SensorValue[light1] <= 72)
 	{
-		turnRight();
-		if (SensorValue[light2] <= 40 || SensorValue[light2] <= 72)
+		while (SensorValue[light2] <= 40 || SensorValue[light2] >= 72)
 		{
-			stopall();
+			turnRight();
+		}
+
+		if (SensorValue[light2] >= 40 || SensorValue[light2] <= 72)
+		{
+			allStop();
 			servo[backGrab]= 90;
 			wait10Msec(100);
 			allBackwards();
 			wait10Msec(100);
+			allStop();
 			servo[backGrab]= 0;
 		}
-		else
-		 turnRight();
 	}
-	else if (SensorValue[light2] >= 40 || SensorValue[light2] >= 72)
+	else if (SensorValue[light1] <= 40 || SensorValue[light2] >= 72)
 		allForward();
+
 }
 
 task main()
 {
- // initializeRobot();
+ initializeRobot();
 
  // waitForStart(); // Wait for the beginning of autonomous phase.
 
 
   while (true)
   {
-  	servo[dump]= 0;
-  	servo[dump]= 180;
   	allForward();
   	Sensor();
-  	servo[dump]= 0;
-  	servo[dump]= 180;
+  	turnLeft();
+  	wait10Msec(100);
+  	allForward();
+  	wait30();
   }
 }

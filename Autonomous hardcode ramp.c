@@ -1,9 +1,9 @@
 #pragma config(Hubs,  S1, HTServo,  HTMotor,  HTMotor,  none)
-#pragma config(Sensor, S2,     light1,         sensorLightActive)
-#pragma config(Sensor, S3,     light2,         sensorLightActive)
+#pragma config(Sensor, S2,     light2,         sensorLightActive)
 #pragma config(Sensor, S4,     inferred,       sensorNone)
-#pragma config(Motor,  mtr_S1_C2_1,     motorD,        tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C2_2,     motorE,        tmotorTetrix, openLoop)
+#pragma config(Sensor, S3,     light1,         sensorLightActive)
+#pragma config(Motor,  mtr_S1_C2_1,     slR,           tmotorTetrix, openLoop, reversed)
+#pragma config(Motor,  mtr_S1_C2_2,     slL,           tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C3_1,     frontLeft,     tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C3_2,     frontRight,    tmotorTetrix, openLoop, reversed)
 #pragma config(Servo,  srvo_S1_C1_1,    frontGate,            tServoStandard)
@@ -74,41 +74,25 @@ void initializeRobot()
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void Sensor()
+task main()// hard code ramp
 {
-	if (SensorValue[light2] <= 40 || SensorValue[light2] <= 72)
-	{
-		turnRight();
-		if (SensorValue[light2] <= 40 || SensorValue[light2] <= 72)
-		{
-			stopall();
-			servo[backGrab]= 90;
-			wait10Msec(100);
-			allBackwards();
-			wait10Msec(100);
-			servo[backGrab]= 0;
-		}
-		else
-		 turnRight();
-	}
-	else if (SensorValue[light2] >= 40 || SensorValue[light2] >= 72)
-		allForward();
-}
+  initializeRobot();
 
-task main()
-{
- // initializeRobot();
-
- // waitForStart(); // Wait for the beginning of autonomous phase.
+  waitForStart(); // Wait for the beginning of autonomous phase.
 
 
   while (true)
   {
-  	servo[dump]= 0;
-  	servo[dump]= 180;
-  	allForward();
   	Sensor();
-  	servo[dump]= 0;
-  	servo[dump]= 180;
-  }
+  	turnLeft();
+  	wait30();
+  	allForward();
+  	wait30();
+  	turnRight();
+  	allForward();
+  	wait10Msec(1)
+  	servo[backGrab]=90;
+
+
+	}
 }

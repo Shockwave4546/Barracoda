@@ -21,3 +21,8 @@ void allBackwards()
 	motor[frontLeft] = -100;
 	motor[frontRight] = -100;
 }
+void stopall()
+{
+	motor[frontLeft] = 0;
+	motor[frontRight] = 0;
+}
