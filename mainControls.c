@@ -1,3 +1,5 @@
+#pragma systemFile //madde by Will M.
+
 void allForward()
 {
 	motor[frontLeft] = 100;

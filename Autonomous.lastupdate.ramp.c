@@ -1,9 +1,10 @@
 #pragma config(Hubs,  S1, HTServo,  HTMotor,  HTMotor,  none)
+#pragma config(Sensor, S1,     ,               sensorI2CMuxController)
 #pragma config(Sensor, S2,     light1,         sensorLightActive)
 #pragma config(Sensor, S3,     light2,         sensorLightActive)
 #pragma config(Sensor, S4,     inferred,       sensorNone)
-#pragma config(Motor,  mtr_S1_C2_1,     motorD,        tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C2_2,     motorE,        tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C2_1,     sissorliftRight, tmotorTetrix, openLoop, reversed)
+#pragma config(Motor,  mtr_S1_C2_2,     sissorliftLeft, tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C3_1,     frontLeft,     tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C3_2,     frontRight,    tmotorTetrix, openLoop, reversed)
 #pragma config(Servo,  srvo_S1_C1_1,    frontGate,            tServoStandard)
@@ -46,10 +47,10 @@
 
 void initializeRobot()
 {
-  // Place code here to sinitialize servos to starting positions.
-  // Sensors are automatically configured and setup by ROBOTC. They may need a brief time to stabilize.
+	// Place code here to sinitialize servos to starting positions.
+	// Sensors are automatically configured and setup by ROBOTC. They may need a brief time to stabilize.
 
-  return;
+	return;
 }
 
 
@@ -73,6 +74,52 @@ void initializeRobot()
 // At the end of the autonomous period, the FMS will autonmatically abort (stop) execution of the program.
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+void allForward()
+{
+	motor[frontLeft] = 100;
+	motor[frontRight] = 100;
+}
+
+void turnRight()
+{
+	motor[frontLeft] = 100;
+	motor[frontRight] = -100;
+}
+
+void turnLeft()
+{
+	motor[frontLeft] = -100;
+	motor[frontRight] = 100;
+}
+
+void allBackwards()
+{
+	motor[frontLeft] = -100;
+	motor[frontRight] = -100;
+}
+void allStop()
+{
+	motor[frontLeft] = 0;
+	motor[frontRight] = 0;
+}
+
+void wait30()
+{
+	wait10Msec(100);
+	wait10Msec(100);
+	wait10Msec(100);
+}
+
+void wait50()
+{
+	wait10Msec(100);
+	wait10Msec(100);
+	wait10Msec(100);
+	wait10Msec(100);
+	wait10Msec(100);
+}
+*/
 
 void Sensor()
 {
@@ -89,7 +136,6 @@ void Sensor()
 			servo[backGrab]= 90;
 			wait10Msec(100);
 			allBackwards();
-			wait10Msec(100);
 			allStop();
 			servo[backGrab]= 0;
 		}
@@ -101,18 +147,18 @@ void Sensor()
 
 task main()
 {
- initializeRobot();
+	initializeRobot();
 
- // waitForStart(); // Wait for the beginning of autonomous phase.
+	waitForStart(); // Wait for the beginning of autonomous phase.
 
 
-  while (true)
-  {
-  	allForward();
-  	Sensor();
-  	turnLeft();
-  	wait10Msec(100);
-  	allForward();
-  	wait30();
-  }
+	while (true)
+	{
+		allForward();
+		Sensor();
+		turnLeft();
+		wait10Msec(100);
+		allForward();
+		wait30();
+	}
 }
