@@ -102,6 +102,7 @@ task main()
 	  {
 	  	motor[frontLeft] = joystick.joy1_y1;
 	  	motor[frontRight] = joystick.joy1_y2;
+	  	motor[sissorliftLeft] = joystick.joy2_
 	  }
 	  if (joy1Btn(8) == 1)
 	  {

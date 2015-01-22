@@ -1,6 +1,5 @@
 #pragma systemFile //made by Brandon S.
 // name "secondaryControls.c"
-#include "mainControls.c"
 
 void wait30()
 {

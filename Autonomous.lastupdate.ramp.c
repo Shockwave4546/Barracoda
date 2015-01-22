@@ -74,57 +74,13 @@ void initializeRobot()
 // At the end of the autonomous period, the FMS will autonmatically abort (stop) execution of the program.
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-void allForward()
-{
-	motor[frontLeft] = 100;
-	motor[frontRight] = 100;
-}
-
-void turnRight()
-{
-	motor[frontLeft] = 100;
-	motor[frontRight] = -100;
-}
-
-void turnLeft()
-{
-	motor[frontLeft] = -100;
-	motor[frontRight] = 100;
-}
-
-void allBackwards()
-{
-	motor[frontLeft] = -100;
-	motor[frontRight] = -100;
-}
-void allStop()
-{
-	motor[frontLeft] = 0;
-	motor[frontRight] = 0;
-}
-
-void wait30()
-{
-	wait10Msec(100);
-	wait10Msec(100);
-	wait10Msec(100);
-}
-
-void wait50()
-{
-	wait10Msec(100);
-	wait10Msec(100);
-	wait10Msec(100);
-	wait10Msec(100);
-	wait10Msec(100);
-}
-*/
 
 void Sensor()
 {
-	if (SensorValue[light1] >= 40 || SensorValue[light1] <= 72)
-	{
+		while (SensorValue[light1] <= 40 || SensorValue[light1] >=72)
+		{
+			sleep(10);
+		}
 		while (SensorValue[light2] <= 40 || SensorValue[light2] >= 72)
 		{
 			turnRight();
@@ -134,14 +90,14 @@ void Sensor()
 		{
 			allStop();
 			servo[backGrab]= 90;
-			wait10Msec(100);
+			sleep(10);
 			allBackwards();
+			sleep(10);
 			allStop();
 			servo[backGrab]= 0;
 		}
-	}
-	else if (SensorValue[light1] <= 40 || SensorValue[light2] >= 72)
-		allForward();
+//	else if (SensorValue[light1] <= 40 || SensorValue[light2] >= 72)
+//		allForward();
 
 }
 
@@ -151,14 +107,10 @@ task main()
 
 	waitForStart(); // Wait for the beginning of autonomous phase.
 
-
-	while (true)
-	{
-		allForward();
-		Sensor();
-		turnLeft();
-		wait10Msec(100);
-		allForward();
-		wait30();
-	}
+	allForward();
+	Sensor();
+	turnLeft();
+	sleep(5);
+	allForward();
+	sleep(30);
 }
