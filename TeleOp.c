@@ -20,9 +20,9 @@
 
 void initializeRobot()
 {
-  servo[frontGate] = 155;
-  servo[backGrab] = 35;
-  return;
+	servo[frontGate] = 155;
+	servo[backGrab] = 35;
+	return;
 }
 
 int posThreshold = 10;
@@ -59,12 +59,12 @@ int negThreshold = -10;
 
 task main()
 {
-  initializeRobot();
-  //waitForStart();   // wait for start of tele-op phase
+	initializeRobot();
+	//waitForStart();   // wait for start of tele-op phase
 
-  while(true)
-  {
-  	getJoystickSettings(joystick);
+	while(true)
+	{
+		getJoystickSettings(joystick);
 
 		if (joystick.joy1_TopHat == 0)
 		{
@@ -82,56 +82,59 @@ task main()
 		{
 			turnLeft();
 		}
-		/*else if (abs(joystick.joy1_y1) > posThreshold)
-	  {
-	    motor[frontLeft] = joystick.joy1_y1;
-	  }
-	  else if (abs(joystick.joy1_y1) < negThreshold)
-	  {
-	    motor[frontLeft] = joystick.joy1_y1;
-	  }
-	  else if (abs(joystick.joy1_y2) > posThreshold)
-	  {
-	  	motor[frontRight] = joystick.joy1_y2;
-	  }
-	  else if (abs(joystick.joy1_y2) < negThreshold)
-	  {
-	  	motor[frontRight] = joystick.joy1_y2;
-	  }*/
-	  else
-	  {
-	  	motor[frontLeft] = joystick.joy1_y1;
-	  	motor[frontRight] = joystick.joy1_y2;
-	  	motor[sissorliftLeft] = joystick.joy2_
-	  }
-	  if (joy1Btn(8) == 1)
-	  {
-	  	servo[frontGate] = 170;
-	  	sleep(300);
-	  	servo[frontGate] = 0;
-	  }
-
-	  if (joy1Btn(6) == 1)
-	  {
-	  	if (servo[frontGate] == 155)
-	  	{
-	  		servo[frontGate] = 0;
-	  	}
-	  	else
-	  	{
-	  		servo[frontGate] = 155;
-	  	}
-		}
-
-		if (joy1Btn(5) == 1)
+		else if (joystick.joy2Btn5)
 		{
-			servo[backGrab] = 35;
-		}
 
-		if (joy1Btn(7) == 1)
-		{
-			servo[backGrab] = 255;
-		}
+			/*else if (abs(joystick.joy1_y1) > posThreshold)
+			{
+			motor[frontLeft] = joystick.joy1_y1;
+			}
+			else if (abs(joystick.joy1_y1) < negThreshold)
+			{
+			motor[frontLeft] = joystick.joy1_y1;
+			}
+			else if (abs(joystick.joy1_y2) > posThreshold)
+			{
+			motor[frontRight] = joystick.joy1_y2;
+			}
+			else if (abs(joystick.joy1_y2) < negThreshold)
+			{
+			motor[frontRight] = joystick.joy1_y2;
+			}*/
+			else
+			{
+				motor[frontLeft] = joystick.joy1_y1;
+				motor[frontRight] = joystick.joy1_y2;
+				motor[sissorliftLeft] = joystick.joy2_
+			}
+			if (joy1Btn(8) == 1)
+			{
+				servo[frontGate] = 170;
+				sleep(300);
+				servo[frontGate] = 0;
+			}
 
-  }
-}
+			if (joy1Btn(6) == 1)
+			{
+				if (servo[frontGate] == 155)
+				{
+					servo[frontGate] = 0;
+				}
+				else
+				{
+					servo[frontGate] = 155;
+				}
+			}
+
+			if (joy1Btn(5) == 1)
+			{
+				servo[backGrab] = 35;
+			}
+
+			if (joy1Btn(7) == 1)
+			{
+				servo[backGrab] = 255;
+			}
+
+		}
+	}

@@ -77,29 +77,30 @@ void initializeRobot()
 
 void Sensor()
 {
-		while (SensorValue[light1] <= 40 || SensorValue[light1] >=72)
-		{
-			sleep(10);
-		}
-		while (SensorValue[light2] <= 40 || SensorValue[light2] >= 72)
-		{
-			turnRight();
-		}
+	while (SensorValue[light1] <= 40 || SensorValue[light1] >=72)
+	{
+		sleep(10);
+	}
+	while (SensorValue[light2] <= 40 || SensorValue[light2] >= 72)
+	{
+		turnRight();
+	}
 
-		if (SensorValue[light2] >= 40 || SensorValue[light2] <= 72)
-		{
-			allStop();
-			servo[backGrab]= 90;
-			sleep(10);
-			allBackwards();
-			sleep(10);
-			allStop();
-			servo[backGrab]= 0;
-		}
-//	else if (SensorValue[light1] <= 40 || SensorValue[light2] >= 72)
-//		allForward();
+	if (SensorValue[light2] >= 40 || SensorValue[light2] <= 72)
+	{
+		allStop();
+		servo[backGrab]= 90;
+		sleep(10);
+		allBackwards();
+		sleep(10);
+		allStop();
+		servo[backGrab]= 0;
+	}
+	//	else if (SensorValue[light1] <= 40 || SensorValue[light2] >= 72)
+	//		allForward();
 
 }
+int i = 0;
 
 task main()
 {
@@ -107,10 +108,24 @@ task main()
 
 	waitForStart(); // Wait for the beginning of autonomous phase.
 
-	allForward();
-	Sensor();
-	turnLeft();
-	sleep(5);
-	allForward();
-	sleep(30);
+	if (SensorValue[light1] >= 40 || SensorValue[light1] <= 72)
+	{
+		allForward();
+		sleep(5000);
+		Sensor();
+		turnLeft();
+		sleep(5);
+		allForward();
+		sleep(30);
+		allStop();
+		int i = 10;
+	}
+	else (SensorValue[light1] <= 40 || SensorValue[light1] >= 72);
+	{
+		if (i+i==0)
+		{
+			allForward();
+
+		}
+	}
 }
