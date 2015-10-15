@@ -1,9 +1,10 @@
 #pragma config(Hubs,  S1, HTServo,  HTMotor,  HTMotor,  none)
+#pragma config(Sensor, S1,     ,               sensorI2CMuxController)
 #pragma config(Sensor, S2,     light1,         sensorLightActive)
 #pragma config(Sensor, S3,     light2,         sensorLightActive)
 #pragma config(Sensor, S4,     inferred,       sensorNone)
-#pragma config(Motor,  mtr_S1_C2_1,     motorD,        tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C2_2,     motorE,        tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C2_1,     sissorliftRight, tmotorTetrix, openLoop, reversed)
+#pragma config(Motor,  mtr_S1_C2_2,     sissorliftLeft, tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C3_1,     frontLeft,     tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C3_2,     frontRight,    tmotorTetrix, openLoop, reversed)
 #pragma config(Servo,  srvo_S1_C1_1,    frontGate,            tServoStandard)
@@ -46,10 +47,10 @@
 
 void initializeRobot()
 {
-  // Place code here to sinitialize servos to starting positions.
-  // Sensors are automatically configured and setup by ROBOTC. They may need a brief time to stabilize.
+	// Place code here to sinitialize servos to starting positions.
+	// Sensors are automatically configured and setup by ROBOTC. They may need a brief time to stabilize.
 
-  return;
+	return;
 }
 
 
@@ -74,32 +75,57 @@ void initializeRobot()
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/*
 void Sensor()
 {
-
-	while(SensorValue[light1] <= 40 || SensorValue[light1] >= 72)
+	while (SensorValue[light1] <= 40 || SensorValue[light1] >=72)
+	{
+		sleep(10);
+	}
+	while (SensorValue[light2] <= 40 || SensorValue[light2] >= 72)
 	{
 		turnRight();
-		if (SensorValue[light2] >= 40 || SensorValue[light2] <= 72)
-		{
-			allStop();
-			servo[backGrab]= 90;
-			wait10Msec(100);
-			allBackwards();
-			wait10Msec(100);
-			servo[backGrab]= 0;
-		}
-
 	}
+
+	if (SensorValue[light2] >= 40 || SensorValue[light2] <= 72)
+	{
+		allStop();
+		servo[backGrab]= 90;
+		sleep(10);
+		allBackwards();
+		sleep(10);
+		allStop();
+		servo[backGrab]= 0;
+	}
+	//	else if (SensorValue[light1] <= 40 || SensorValue[light2] >= 72)
+	//		allForward();
+
 }
-*/
+int i = 0;
+
 task main()
 {
- 		initializeRobot();
- 		waitForStart(); // Wait for the beginning of autonomous phase.
- 		allForward();
- 		wait10Msec(400);
- 		allStop();
-  //	Sensor();
+	initializeRobot();
+
+	waitForStart(); // Wait for the beginning of autonomous phase.
+
+	if (SensorValue[light1] >= 40 || SensorValue[light1] <= 72)
+	{
+		allForward();
+		sleep(5000);
+		Sensor();
+		turnLeft();
+		sleep(5);
+		allForward();
+		sleep(30);
+		allStop();
+		int i = 10;
+	}
+	else (SensorValue[light1] <= 40 || SensorValue[light1] >= 72);
+	{
+		if (i+i==0)
+		{
+			allForward();
+
+		}
+	}
 }

@@ -2,8 +2,8 @@
 #pragma config(Sensor, S2,     light1,         sensorLightActive)
 #pragma config(Sensor, S3,     light2,         sensorLightActive)
 #pragma config(Sensor, S4,     inferred,       sensorNone)
-#pragma config(Motor,  mtr_S1_C2_1,     motorD,        tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C2_2,     motorE,        tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C2_1,     sissorliftRight, tmotorTetrix, openLoop, reversed)
+#pragma config(Motor,  mtr_S1_C2_2,     sissorliftLeft, tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C3_1,     frontLeft,     tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C3_2,     frontRight,    tmotorTetrix, openLoop, reversed)
 #pragma config(Servo,  srvo_S1_C1_1,    frontGate,            tServoStandard)
@@ -27,8 +27,6 @@
 
 #include "JoystickDriver.c"  //Include file to "handle" the Bluetooth messages.
 
-#include "mainControls.c" //Forward, Back, etc. lib made by Will M.
-#include "secondaryControls.c" //timing etc. lib made by Braandon S.
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 //                                    initializeRobot
@@ -46,10 +44,10 @@
 
 void initializeRobot()
 {
-  // Place code here to sinitialize servos to starting positions.
-  // Sensors are automatically configured and setup by ROBOTC. They may need a brief time to stabilize.
+	// Place code here to sinitialize servos to starting positions.
+	// Sensors are automatically configured and setup by ROBOTC. They may need a brief time to stabilize.
 
-  return;
+	return;
 }
 
 
@@ -74,32 +72,85 @@ void initializeRobot()
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/*
+void allForward()
+{
+	motor[frontLeft] = 100;
+	motor[frontRight] = 100;
+}
+
+void turnRight()
+{
+	motor[frontLeft] = 100;
+	motor[frontRight] = -100;
+}
+
+void turnLeft()
+{
+	motor[frontLeft] = -100;
+	motor[frontRight] = 100;
+}
+
+void allBackwards()
+{
+	motor[frontLeft] = -100;
+	motor[frontRight] = -100;
+}
+void allStop()
+{
+	motor[frontLeft] = 0;
+	motor[frontRight] = 0;
+}
+
+void wait30()
+{
+	wait10Msec(100);
+	wait10Msec(100);
+	wait10Msec(100);
+}
+
+void wait50()
+{
+	wait10Msec(100);
+	wait10Msec(100);
+	wait10Msec(100);
+	wait10Msec(100);
+	wait10Msec(100);
+}
+
+
 void Sensor()
 {
-
-	while(SensorValue[light1] <= 40 || SensorValue[light1] >= 72)
+	if (SensorValue[light1] >= 40 || SensorValue[light1] <= 72)
 	{
-		turnRight();
+		while (SensorValue[light2] <= 40 || SensorValue[light2] >= 72)
+		{
+			turnRight();
+		}
+
 		if (SensorValue[light2] >= 40 || SensorValue[light2] <= 72)
 		{
 			allStop();
 			servo[backGrab]= 90;
 			wait10Msec(100);
 			allBackwards();
-			wait10Msec(100);
+			allStop();
 			servo[backGrab]= 0;
 		}
-
 	}
+	else if (SensorValue[light1] <= 40 || SensorValue[light2] >= 72)
+		allForward();
+
 }
-*/
+
 task main()
 {
- 		initializeRobot();
- 		waitForStart(); // Wait for the beginning of autonomous phase.
- 		allForward();
- 		wait10Msec(400);
- 		allStop();
-  //	Sensor();
+	initializeRobot();
+
+	waitForStart(); // Wait for the beginning of autonomous phase.
+
+
+	while (true)
+	{
+
+  }
 }
