@@ -1,5 +1,3 @@
-#pragma systemFile
-
 void allForward()
 {
 	motor[frontLeft] = 100;
